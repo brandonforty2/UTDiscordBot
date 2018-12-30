@@ -33,6 +33,9 @@ namespace discordColorBot
             await client.StartAsync();
 
             await Task.Delay(-1);
+
+            //await IconTimer();
+            
         }
 
         public async Task InstallCommands()
@@ -60,7 +63,7 @@ namespace discordColorBot
             var result = await commands.ExecuteAsync(context, argPos);
             if (!result.IsSuccess)
                 await context.Channel.SendMessageAsync(result.ErrorReason);
-        }
+        }       
 
     }
 }

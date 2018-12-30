@@ -1,4 +1,5 @@
-﻿#define LINUX
+﻿//Define which OS this is being built for; LINUX or WINDOWS
+#define WINDOWS
 
 using Discord.Commands;
 using Discord;
@@ -42,9 +43,74 @@ namespace discordColorBot.Modules
                 if (yeet == "auto")
                 {
                     messageText = "Automatically setting icon";
-                    iconfile = @"white.png";
+                    //iconfile = @"white.png";
+
+#if (WINDOWS)
+
+                    System.Diagnostics.Process process = new System.Diagnostics.Process();
+                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                    startInfo.FileName = "cmd.exe";
+                    startInfo.Arguments = @"/C py TowerColor.py";
+                    //startInfo.WorkingDirectory = @"C:\Users\brand\Documents\Programming\utTowerColor\discordColorBot\bin\Debug";
+                    //process.StartInfo = startInfo;
+                    Process command = Process.Start(startInfo);
+                    command.WaitForExit();
+
+
+#endif
+
+                    //Run colorDetection on pi command line
+#if (LINUX)
+                    Process proc = new Process();
+                    proc.StartInfo.UseShellExecute = false;
+                    proc.StartInfo.RedirectStandardOutput = true;
+
+                    proc.StartInfo.FileName = "python3";
+                    proc.StartInfo.Arguments = "TowerColor.py";
+
+                    proc.Start();
+                    proc.WaitForExit();
+#endif
+
+                    //string colorData = File.ReadAllText(@"C: \Users\brand\Documents\Programming\utTowerColor\data.txt");
+                    string colorData = File.ReadAllText("data.txt");
+                    Console.WriteLine(colorData);
+
+                    //await message.Channel.SendMessageAsync("Command Recieved");
+
+                    if (colorData == "0,0")
+                    {
+                        yeet = "orange";
+                    }
+
+                    else if (colorData == "0,1")
+                    {
+                        yeet = "orangewhite";
+                    }
+
+                    else if (colorData == "1,1")
+                    {
+                        yeet = "white";
+                    }
+
+                    else if (colorData == "2,2")
+                    {
+                        yeet = "dark";
+                    }
+
+                    else if (colorData == "3,3")
+                    {
+                        yeet = "notlit";
+                    }
+
+                    else
+                    {
+                        yeet = "unknown";
+                    }
                 }
-                else if (yeet == "white")
+
+                if (yeet == "white")
                 {
                     messageText = "Setting icon to white";
                     iconfile = @"white.png";
@@ -66,11 +132,11 @@ namespace discordColorBot.Modules
                 }
                 else
                 {
-                    messageText = "Unknown Color";
+                    messageText = "Unknown Color or the tower is not lit";
                 }
 
                 await Context.Channel.SendMessageAsync(messageText);
-                if (messageText != "Unknown Color")
+                if (messageText != "Unknown Color or the tower is not lit")
                 {
                     await Context.Guild.ModifyAsync(async server =>
                     {
@@ -90,7 +156,7 @@ namespace discordColorBot.Modules
         [Command("towercolor")]
         public async Task TowerColor([Summary("Provides current color of tower")] string yeet = null)
         {
-            Console.WriteLine("towercolor recieved");
+            //Console.WriteLine("towercolor recieved");
 
 #if (WINDOWS)
             
@@ -117,9 +183,11 @@ namespace discordColorBot.Modules
             proc.StartInfo.Arguments = "TowerColor.py";
 
             proc.Start();
+            proc.WaitForExit();
 #endif
 
             string messageText = "";
+            string colorOfTower = "";
 
             //string colorData = File.ReadAllText(@"C: \Users\brand\Documents\Programming\utTowerColor\data.txt");
             string colorData = File.ReadAllText("data.txt");
@@ -129,21 +197,25 @@ namespace discordColorBot.Modules
 
             if (colorData == "0,0")
             {
+                colorOfTower = "orange";
                 messageText = "The tower is Orange today!";
             }
 
             else if (colorData == "0,1")
             {
+                colorOfTower = "orangewhite";
                 messageText = "The tower is orange and white today!";
             }
 
             else if (colorData == "1,1")
             {
+                colorOfTower = "white";
                 messageText = "The tower is white today!";
             }
 
             else if (colorData == "2,2")
             {
+                colorOfTower = "dark";
                 messageText = "The tower is dark today";
             }
 
@@ -154,12 +226,14 @@ namespace discordColorBot.Modules
 
             else
             {
+                colorOfTower = "white";
                 messageText = "Sorry, I do not know what color the tower is";
             }
 
             Console.WriteLine(messageText);
 
             await Context.Channel.SendMessageAsync(messageText);
+
             //await Context.Channel.SendFileAsync("out.jpg", messageText);
             //await Context.Channel.SendFileAsync("out.jpg");
 
