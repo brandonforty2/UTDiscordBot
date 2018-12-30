@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotCode", "BotCode\BotCode.csproj", "{4EDCB3EE-757A-461E-879F-FFDA816B66A4}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "TowerColor", "TowerColor\TowerColor.pyproj", "{5CECBC29-B030-4E1C-B456-CA69985FE4A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		multi-language|Any CPU = multi-language|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4EDCB3EE-757A-461E-879F-FFDA816B66A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EDCB3EE-757A-461E-879F-FFDA816B66A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EDCB3EE-757A-461E-879F-FFDA816B66A4}.multi-language|Any CPU.ActiveCfg = multi-language|Any CPU
+		{4EDCB3EE-757A-461E-879F-FFDA816B66A4}.multi-language|Any CPU.Build.0 = multi-language|Any CPU
+		{4EDCB3EE-757A-461E-879F-FFDA816B66A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EDCB3EE-757A-461E-879F-FFDA816B66A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CECBC29-B030-4E1C-B456-CA69985FE4A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CECBC29-B030-4E1C-B456-CA69985FE4A3}.multi-language|Any CPU.ActiveCfg = multi-language|Any CPU
+		{5CECBC29-B030-4E1C-B456-CA69985FE4A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4F743204-566A-46D8-BF0B-53F42E36C077}
+	EndGlobalSection
+EndGlobal
