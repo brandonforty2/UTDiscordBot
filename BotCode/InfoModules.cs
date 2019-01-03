@@ -19,13 +19,23 @@ namespace discordColorBot.Modules
         public async Task Say([Remainder, Summary("The text to echo")] string echo)
         {
             // ReplyAsync is a method on ModuleBase
-            await ReplyAsync(echo);
+            var user = Context.User as SocketGuildUser;
+            var permission = (user as IGuildUser).GuildPermissions;
+            if (permission.Administrator == true)
+            {
+                await ReplyAsync(echo);
+            }
+            else
+            {
+                await ReplyAsync("You do not have permission to do that");
+            }
+            
         }
 
         [Command("ping")]
         public async Task Ping([Summary("Says Pong!")] string yeet = null)
         {
-            await Context.Channel.SendMessageAsync("Pong!");
+            await ReplyAsync("Pong!");
         }
 
 
@@ -244,7 +254,13 @@ namespace discordColorBot.Modules
         {
             string currentTime = DateTime.Now.ToString("h:mm tt");
             string messageText = "It is " + currentTime + " and OU still sucks!";
-            await Context.Channel.SendMessageAsync(messageText);
+            await ReplyAsync(messageText);
+        }
+
+        [Command("score")]
+        public async Task Score([Summary("Says the only relavent football score")] string yeet = null)
+        {
+            await ReplyAsync("Texas beat OU 48 to 45 in the Red River Rivalry with a last second field goal! :metal:");
         }
 
     }
