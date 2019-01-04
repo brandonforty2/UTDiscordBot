@@ -260,7 +260,7 @@ namespace discordColorBot.Modules
         [Command("score")]
         public async Task Score([Summary("Says the only relavent football score")] string yeet = null)
         {
-            await ReplyAsync("Texas beat OU 48 to 45 in the Red River Rivalry with a last second field goal! :metal:");
+            await ReplyAsync("Texas beat OU 48 to 45 in the Red River Rivalry with a last second field goal by Dicker the Kicker! :metal:");
         }
 
     }
