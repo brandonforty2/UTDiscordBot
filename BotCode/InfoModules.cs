@@ -9,7 +9,7 @@ using System.IO;
 using System.Diagnostics;
 using System;
 
-namespace discordColorBot.Modules
+namespace BotCode.Modules
 {
     public class Info : ModuleBase
     {

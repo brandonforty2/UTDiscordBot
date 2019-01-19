@@ -7,7 +7,7 @@ using Discord.Commands;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 
-namespace discordColorBot
+namespace BotCode
 {
     public class Program
     {
@@ -34,7 +34,6 @@ namespace discordColorBot
 
             await Task.Delay(-1);
 
-            //await IconTimer();
             
         }
 
