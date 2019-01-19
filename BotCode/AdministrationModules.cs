@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Timers;
 using System.Threading.Tasks;
 using Discord.Commands;
 using Discord;
@@ -34,13 +35,36 @@ namespace BotCode.Modules
         }
 
         [Command("mute"), Summary("Mutes a person, sends them a warning, and logs the infraction")]
-        public async Task Mute([Remainder, Summary("~mute [user] [reason]")] string mute)
+        public async Task Mute([Remainder, Summary("~mute user, time in minutes, reason")] string mute)
         {
             var user = Context.User as SocketGuildUser;
             var permission = (user as IGuildUser).GuildPermissions;
             if (permission.Administrator == true)
             {
-                await ReplyAsync("yeet");
+                //Parse Command
+                List<string> command = mute.Split(',').ToList();
+                await ReplyAsync(command[0] + command[1] + command[2]);
+
+                //Get the time, only continue if the time is an integer
+                int time = -1;
+                if (Int32.TryParse(command[1], out time))
+                {
+                    await ReplyAsync("Executing Command");
+                    //Convert time to seconds from minutes
+                    time = time * 60;
+                    Console.WriteLine(time);
+
+                    //Mute the user (Does not assign the role?)
+                    var role = Context.Guild.GetRole(511321342549688336);
+                    await (user as IGuildUser).AddRoleAsync(role);
+
+
+                }
+                else
+                {
+                    await ReplyAsync("Error: Time is not a number");
+                }
+
             }
             else if (user.Id == 239099905849819137)
             {
@@ -50,7 +74,14 @@ namespace BotCode.Modules
             {
                 await ReplyAsync("You do not have permission to do that");
             }
+
+
             
+        }
+
+        private static void Unmuter(object user)
+        {
+
         }
     }
 }
