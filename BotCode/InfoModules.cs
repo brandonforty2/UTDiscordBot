@@ -13,25 +13,6 @@ namespace BotCode.Modules
 {
     public class Info : ModuleBase
     {
-
-        // ~say hello -> hello
-        [Command("say"), Summary("Echos a message.")]
-        public async Task Say([Remainder, Summary("The text to echo")] string echo)
-        {
-            // ReplyAsync is a method on ModuleBase
-            var user = Context.User as SocketGuildUser;
-            var permission = (user as IGuildUser).GuildPermissions;
-            if (permission.Administrator == true)
-            {
-                await ReplyAsync(echo);
-            }
-            else
-            {
-                await ReplyAsync("You do not have permission to do that");
-            }
-            
-        }
-
         [Command("ping")]
         public async Task Ping([Summary("Says Pong!")] string yeet = null)
         {

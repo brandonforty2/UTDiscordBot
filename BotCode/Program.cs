@@ -70,7 +70,7 @@ namespace BotCode
         }
 
         //Write stuff to console
-        private Task Log(LogMessage message)
+        public Task Log(LogMessage message)
         {
             Console.WriteLine(message.ToString());
             return Task.CompletedTask;
