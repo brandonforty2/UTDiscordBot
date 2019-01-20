@@ -19,7 +19,12 @@ namespace BotCode
 
         public async Task Start()
         {
-            client = new DiscordSocketClient();
+            client = new DiscordSocketClient(new DiscordSocketConfig
+            {
+                LogLevel = LogSeverity.Info
+            });
+
+            client.Log += Log;
             commands = new CommandService();
 
             string token = File.ReadAllText("apikey.txt");
@@ -62,7 +67,14 @@ namespace BotCode
             var result = await commands.ExecuteAsync(context, argPos);
             if (!result.IsSuccess)
                 await context.Channel.SendMessageAsync(result.ErrorReason);
-        }       
+        }
+
+        //Write stuff to console
+        private Task Log(LogMessage message)
+        {
+            Console.WriteLine(message.ToString());
+            return Task.CompletedTask;
+        }
 
     }
 }
